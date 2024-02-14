@@ -6,7 +6,7 @@
 /*   By: jsarda <jsarda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 16:58:57 by jsarda            #+#    #+#             */
-/*   Updated: 2024/02/14 12:55:10 by jsarda           ###   ########.fr       */
+/*   Updated: 2024/02/14 13:47:38 by jsarda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int				meals = 0;
 pthread_mutex_t	mutex;
 
-void	*philo_eating(void *argv)
+void	*philo_eating()
 {
 	long	i;
 
@@ -43,7 +43,7 @@ int	main(int argc, char **argv)
 	// 1. parsing
 	parsing_init(&table, argv);
 	// 2.init data
-	// init_data();
+	data_init(&table);
 	// 3.dinner start
 	// 4.dinner end clean table
 	while (i < 8)

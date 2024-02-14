@@ -60,14 +60,14 @@ an id for the ptrhead what is it ?
 need to get the table struc */
 typedef struct s_philo
 {
-	// philo id
-	// meal counter
-	// full
+	int					id;
+	long				meals_count;
+	t_bool				full;
 	// last meal for the time passed from last meal
 	// left fork
 	// right fork
 	// thread id
-	// table struc
+	t_table				*table;
 }						t_philo;
 
 /*need to know how many philo are at the table , how long before dying ,
@@ -96,5 +96,7 @@ int						ft_strlen(char *str);
 void					parsing_init(t_table *table, char **argv);
 void					safe_thread(pthread_t *thread, void *(*foo)(void *),
 							void *data, t_operation operation);
+void					data_init(t_table *table);
+void					*safe_malloc(size_t bytes);
 
 #endif
