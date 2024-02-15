@@ -6,7 +6,7 @@
 /*   By: jsarda <jsarda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 16:57:10 by jsarda            #+#    #+#             */
-/*   Updated: 2024/02/14 10:54:37 by jsarda           ###   ########.fr       */
+/*   Updated: 2024/02/15 10:15:45 by jsarda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,14 +75,15 @@ static long	ft_atol(char *str)
 	return (num);
 }
 
-void	parsing_init(t_table *table, char **argv)
+// parse and init my arguments
+void	parsing_init(t_philo *philo, char **argv)
 {
-	table->philo_nbr = ft_atol(argv[1]);
-	if (table->philo_nbr > PHILO_MAX)
+	philo->num_of_philos = ft_atol(argv[1]);
+	if (philo->num_of_philos > PHILO_MAX)
 		error_exit("Cannot have more than 200 philosophers !");
-	table->time_to_die = ft_atol(argv[2]);
-	table->time_to_eat = ft_atol(argv[3]);
-	table->time_to_sleep = ft_atol(argv[4]);
+	philo->time_to_die = ft_atol(argv[2]);
+	philo->time_to_eat = ft_atol(argv[3]);
+	philo->time_to_sleep = ft_atol(argv[4]);
 	if (argv[5])
-		table->number_of_meal = ft_atol(argv[5]);
+		philo->num_times_to_eat = ft_atol(argv[5]);
 }
