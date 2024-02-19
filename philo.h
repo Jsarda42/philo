@@ -49,8 +49,8 @@ typedef struct s_philo
 	int				id;
 	int				meals_eaten;
 	int				eating;
-	pthread_mutex_t	*r_fork;
-	pthread_mutex_t	*l_fork;
+	pthread_mutex_t	*neighbor_fork;
+	pthread_mutex_t	*philo_fork;
 	size_t			last_meal;
 	size_t			start_time;
 
@@ -80,6 +80,7 @@ size_t				get_time_of_day(void);
 // init
 void				parsing_init(t_philo *table, char **argv);
 void				philo_init(t_philo *philo, pthread_mutex_t *forks);
+void				init_forks(pthread_mutex_t *forks, int philo_num);
 
 // safe
 void				safe_thread(pthread_t *thread, void *(*foo)(void *),
