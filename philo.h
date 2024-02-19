@@ -53,22 +53,22 @@ typedef struct s_philo
 	pthread_mutex_t	*philo_fork;
 	size_t			last_meal;
 	size_t			start_time;
+	int				*dead;
 
 	// pthread_t		thread;
-	// int				*dead;
 	// pthread_mutex_t	*write_lock;
 	// pthread_mutex_t	*dead_lock;
 	// pthread_mutex_t	*meal_lock;
 }					t_philo;
 
-// typedef struct s_table
-// {
-// 	int				dead_flag;
-// 	pthread_mutex_t	dead_lock;
-// 	pthread_mutex_t	meal_lock;
-// 	pthread_mutex_t	write_lock;
-// 	t_philo			*philos;
-// }					t_table;
+typedef struct s_program
+{
+	int				dead_flag;
+	// pthread_mutex_t	dead_lock;
+	// pthread_mutex_t	meal_lock;
+	// pthread_mutex_t	write_lock;
+	// t_philo			*philos;
+}					t_program;
 
 // error
 void				error_exit(const char *error);
@@ -79,7 +79,8 @@ size_t				get_time_of_day(void);
 
 // init
 void				parsing_init(t_philo *table, char **argv);
-void				philo_init(t_philo *philo, pthread_mutex_t *forks);
+void				philo_init(t_philo *philos, pthread_mutex_t *forks,
+						t_program *program);
 void				init_forks(pthread_mutex_t *forks, int philo_num);
 
 // safe

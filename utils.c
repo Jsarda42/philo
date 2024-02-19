@@ -6,7 +6,7 @@
 /*   By: jsarda <jsarda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 09:08:09 by jsarda            #+#    #+#             */
-/*   Updated: 2024/02/16 13:34:16 by jsarda           ###   ########.fr       */
+/*   Updated: 2024/02/19 15:27:45 by jsarda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,5 @@ size_t	get_time_of_day(void)
 
 	if (gettimeofday(&current_time, NULL) == -1)
 		error_exit("Erreur getting the time");
-	return ((current_time.tv_sec * 1000) + current_time.tv_usec);
+	return ((current_time.tv_sec * 1000) + current_time.tv_usec / 1000);
 }

@@ -6,19 +6,19 @@
 /*   By: jsarda <jsarda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:41:33 by jsarda            #+#    #+#             */
-/*   Updated: 2024/02/16 14:09:19 by jsarda           ###   ########.fr       */
+/*   Updated: 2024/02/19 15:53:39 by jsarda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*my thread of 1 philo
 1.eating
 2.sleeping
-
+*/
 void	*routine(void *ptr)
 {
 	struct philo *philo = (struct philo *)ptr;
 	//3 100 300 800
-	// while philo is alive
+	// while (ptr->dead)
 	/*{
 		if philo must eat then
 		{
@@ -40,4 +40,4 @@ void	*routine(void *ptr)
 		else
 			think
 	}*/
-//}
+}
