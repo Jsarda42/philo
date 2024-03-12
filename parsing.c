@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsarda <jsarda@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juliensarda <juliensarda@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 16:57:10 by jsarda            #+#    #+#             */
-/*   Updated: 2024/02/16 13:36:16 by jsarda           ###   ########.fr       */
+/*   Updated: 2024/03/11 17:33:42 by juliensarda      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static long	ft_atol(char *str)
 }
 
 // parse and init my arguments
-void	parsing_init(t_philo *philo, char **argv)
+void	parsing_init(t_philo *philo,int argc, char **argv)
 {
 	philo->num_of_philos = ft_atol(argv[1]);
 	if (philo->num_of_philos > PHILO_MAX)
@@ -84,6 +84,6 @@ void	parsing_init(t_philo *philo, char **argv)
 	philo->time_to_die = ft_atol(argv[2]);
 	philo->time_to_eat = ft_atol(argv[3]);
 	philo->time_to_sleep = ft_atol(argv[4]);
-	if (argv[5])
+	if (argc == 6)
 		philo->num_times_to_eat = ft_atol(argv[5]);
 }

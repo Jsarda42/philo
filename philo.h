@@ -39,6 +39,15 @@ typedef enum e_bool
 	true
 }					t_bool;
 
+typedef struct s_program
+{
+	int				dead_flag;
+	// pthread_mutex_t	dead_lock;
+	pthread_mutex_t	meal_lock;
+	// pthread_mutex_t	write_lock;
+	// t_philo			*philos;
+}					t_program;
+
 typedef struct s_philo
 {
 	long			num_of_philos;
@@ -54,21 +63,13 @@ typedef struct s_philo
 	size_t			last_meal;
 	size_t			start_time;
 	int				*dead;
+	//pthread_mutex_t	*print_lock;
 
 	// pthread_t		thread;
-	// pthread_mutex_t	*write_lock;
 	// pthread_mutex_t	*dead_lock;
-	// pthread_mutex_t	*meal_lock;
+	pthread_mutex_t	meal_lock;
 }					t_philo;
 
-typedef struct s_program
-{
-	int				dead_flag;
-	// pthread_mutex_t	dead_lock;
-	// pthread_mutex_t	meal_lock;
-	// pthread_mutex_t	write_lock;
-	// t_philo			*philos;
-}					t_program;
 
 // error
 void				error_exit(const char *error);
@@ -76,16 +77,22 @@ void				error_exit(const char *error);
 // utils
 int					ft_strlen(char *str);
 size_t				get_time_of_day(void);
+void	print_message(int id, char *message, t_philo *philo);
+void	usleep_breakdown(size_t time_ms);
 
 // init
-void				parsing_init(t_philo *table, char **argv);
-void				philo_init(t_philo *philos, pthread_mutex_t *forks,
-						t_program *program);
+void				parsing_init(t_philo *table,int argc,  char **argv);
+void				philo_init(t_philo *philos, pthread_mutex_t	*forks);
 void				init_forks(pthread_mutex_t *forks, int philo_num);
 
 // safe
 void				safe_thread(pthread_t *thread, void *(*foo)(void *),
-						void *data, t_operation operation);
+						t_philo *philo, t_operation operation);
 void				*safe_malloc(size_t bytes);
+void	safe_mutex(pthread_mutex_t *mutex, t_operation operation);
+
+// routine
+void	eating_routine(t_philo *philo);
+void	*philo_routine(void *pointer);
 
 #endif

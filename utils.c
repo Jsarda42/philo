@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsarda <jsarda@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juliensarda <juliensarda@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 09:08:09 by jsarda            #+#    #+#             */
-/*   Updated: 2024/02/19 15:27:45 by jsarda           ###   ########.fr       */
+/*   Updated: 2024/03/11 18:21:06 by juliensarda      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,26 @@ void	error_exit(const char *error)
 	exit(EXIT_FAILURE);
 }
 
+void	usleep_breakdown(size_t time_ms)
+{
+	ssize_t time_us = time_ms * 1000;
+	usleep(time_us);
+}
+
+// void	usleep_breakdown(size_t milliseconds)
+// {
+// 	size_t	start;
+// 	int 	total_sleeps = 0;
+	
+// 	start = get_time_of_day();
+// 	while ((get_time_of_day() - start) < milliseconds) 
+// 	{
+// 		usleep(500);
+// 		total_sleeps++;
+// 	}
+// 	printf("slept for %d\n", total_sleeps * 500);
+// }
+
 size_t	get_time_of_day(void)
 {
 	struct timeval	current_time;
@@ -35,4 +55,12 @@ size_t	get_time_of_day(void)
 	if (gettimeofday(&current_time, NULL) == -1)
 		error_exit("Erreur getting the time");
 	return ((current_time.tv_sec * 1000) + current_time.tv_usec / 1000);
+}
+
+void	print_message(int id, char *message, t_philo *philo)
+{
+	size_t	time;
+
+	time = get_time_of_day() - philo->start_time;
+	printf("%zu %d %s\n",time, id, message);
 }

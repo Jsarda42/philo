@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   safe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsarda <jsarda@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juliensarda <juliensarda@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:49:37 by jsarda            #+#    #+#             */
-/*   Updated: 2024/02/15 11:39:56 by jsarda           ###   ########.fr       */
+/*   Updated: 2024/03/11 13:43:11 by juliensarda      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,11 @@ void	safe_mutex(pthread_mutex_t *mutex, t_operation operation)
 }
 
 // safe thread handler
-void	safe_thread(pthread_t *thread, void *(*foo)(void *), void *data,
+void	safe_thread(pthread_t *thread, void *(*foo)(void *), t_philo *philo,
 		t_operation operation)
 {
 	if (CREATE == operation)
-		thread_error(pthread_create(thread, NULL, foo, data), operation);
+		thread_error(pthread_create(thread, NULL, foo, philo), operation);
 	else if (JOIN == operation)
 		thread_error(pthread_join(*thread, NULL), operation);
 	else if (DETACH == operation)
