@@ -6,20 +6,12 @@
 /*   By: juliensarda <juliensarda@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 16:57:10 by jsarda            #+#    #+#             */
-/*   Updated: 2024/03/11 17:33:42 by juliensarda      ###   ########.fr       */
+/*   Updated: 2024/03/16 10:51:17 by juliensarda      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-/*args are :
-1.number_of_philosophers
-2.time_to_die
-3.time_to_eat
-4.time_to_sleep
-5.number_of_times_each_philosopher_must_eat(optional)*/
-
-/*function to skipp whitespaces*/
 static t_bool	is_white_space(char c)
 {
 	if (c == 32 || (c >= 9 && c <= 13))
@@ -27,7 +19,6 @@ static t_bool	is_white_space(char c)
 	return (false);
 }
 
-/*function to check if its a digit or not*/
 static t_bool	is_digit(char c)
 {
 	if (c >= '0' && c <= '9')
@@ -52,7 +43,6 @@ static void	is_valid(const char *str)
 	}
 }
 
-// i need to make an atol function tu change the string into numbers
 static long	ft_atol(char *str)
 {
 	int		i;
@@ -75,13 +65,14 @@ static long	ft_atol(char *str)
 	return (num);
 }
 
-// parse and init my arguments
 void	parsing_init(t_philo *philo,int argc, char **argv)
 {
 	philo->num_of_philos = ft_atol(argv[1]);
 	if (philo->num_of_philos > PHILO_MAX)
 		error_exit("Cannot have more than 200 philosophers !");
 	philo->time_to_die = ft_atol(argv[2]);
+	//printf("time to die in the parsing init : %ld\n" ,philo->time_to_die);
+	// from this function i am getting the time to die
 	philo->time_to_eat = ft_atol(argv[3]);
 	philo->time_to_sleep = ft_atol(argv[4]);
 	if (argc == 6)

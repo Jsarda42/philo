@@ -39,37 +39,20 @@ typedef enum e_bool
 	true
 }					t_bool;
 
-typedef struct s_program
-{
-	int				dead_flag;
-	// pthread_mutex_t	dead_lock;
-	pthread_mutex_t	meal_lock;
-	// pthread_mutex_t	write_lock;
-	// t_philo			*philos;
-}					t_program;
-
 typedef struct s_philo
 {
-	long			num_of_philos;
+	int				id;
+	int				eating;
+	size_t			last_meal;
+	size_t			start_time;
 	long			time_to_die;
 	long			time_to_eat;
 	long			time_to_sleep;
 	long			num_times_to_eat;
-	int				id;
-	int				meals_eaten;
-	int				eating;
-	pthread_mutex_t	*neighbor_fork;
+	long			num_of_philos;
 	pthread_mutex_t	*philo_fork;
-	size_t			last_meal;
-	size_t			start_time;
-	int				*dead;
-	//pthread_mutex_t	*print_lock;
-
-	// pthread_t		thread;
-	// pthread_mutex_t	*dead_lock;
-	pthread_mutex_t	meal_lock;
+	pthread_mutex_t	*neighbor_fork;
 }					t_philo;
-
 
 // error
 void				error_exit(const char *error);
@@ -94,5 +77,11 @@ void	safe_mutex(pthread_mutex_t *mutex, t_operation operation);
 // routine
 void	eating_routine(t_philo *philo);
 void	*philo_routine(void *pointer);
+
+//death
+void *check_death(void *pointer);
+
+// threads
+void ft_threads(t_philo *philo, pthread_t *threads);
 
 #endif
