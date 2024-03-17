@@ -52,6 +52,7 @@ typedef struct s_philo
 	long			num_of_philos;
 	pthread_mutex_t	*philo_fork;
 	pthread_mutex_t	*neighbor_fork;
+	pthread_mutex_t *print_lock;
 }					t_philo;
 
 // error
