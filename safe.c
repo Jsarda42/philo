@@ -6,7 +6,7 @@
 /*   By: juliensarda <juliensarda@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:49:37 by jsarda            #+#    #+#             */
-/*   Updated: 2024/03/11 13:43:11 by juliensarda      ###   ########.fr       */
+/*   Updated: 2024/03/18 11:59:46 by juliensarda      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ static void	mutex_error(int status, t_operation operation)
 		error_exit("Mutex is locked");
 }
 
-/*Threads errors*/
 static void	thread_error(int status, t_operation operation)
 {
 	if (status == 0)
@@ -64,7 +63,6 @@ static void	thread_error(int status, t_operation operation)
 					"thread specifies the calling thread.");
 }
 
-// safe mutex error
 void	safe_mutex(pthread_mutex_t *mutex, t_operation operation)
 {
 	if (LOCK == operation)
@@ -80,7 +78,6 @@ void	safe_mutex(pthread_mutex_t *mutex, t_operation operation)
 					"use <LOCK> <UNLOCK> <INIT> <DESTROY>");
 }
 
-// safe thread handler
 void	safe_thread(pthread_t *thread, void *(*foo)(void *), t_philo *philo,
 		t_operation operation)
 {

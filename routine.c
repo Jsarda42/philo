@@ -6,7 +6,7 @@
 /*   By: juliensarda <juliensarda@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:41:33 by jsarda            #+#    #+#             */
-/*   Updated: 2024/03/18 10:45:56 by juliensarda      ###   ########.fr       */
+/*   Updated: 2024/03/18 12:02:10 by juliensarda      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,10 @@ void	eating_routine(t_philo *philo)
 	else
 		safe_mutex(philo->philo_fork, LOCK);
 	print_message(philo->id, "has taken a fork", philo);
-	write(1, "hello\n", 6);
 	if (philo->num_of_philos == 1)
 	{
-		// if there if 1 philo i let him take his fork
-		// i make him sleep the time of death because there is no other fork
-		// and i unlock his fork
 		usleep_breakdown(philo->time_to_die);
-		// here i still need to trigger something so my program now his last meal lasted
-		// the time of the time of death 
-		// probably philo->last_meal = time_of_death
 		philo->last_meal = philo->time_to_die;
-		// it seems to work but the message would print before the usleep finish
 		safe_mutex(philo->philo_fork, UNLOCK);
 		return ;
 	}
@@ -40,8 +32,14 @@ void	eating_routine(t_philo *philo)
 		safe_mutex(philo->neighbor_fork, LOCK);
 	print_message(philo->id, "has taken a fork", philo);
     print_message(philo->id, "is eating", philo);
+	// it seems i need t mutex here to protect the last meal 
+	safe_mutex(&philo->meal_lock, LOCK);
 	philo->last_meal = get_time_of_day();
+	safe_mutex(&philo->meal_lock, UNLOCK);
     usleep_breakdown(philo->time_to_eat);
+	// i believe i might need to implement something 
+	// if the philo second fork is not available then i should do 
+	// something
 	safe_mutex(philo->neighbor_fork, UNLOCK);
 	safe_mutex(philo->philo_fork, UNLOCK);
 }

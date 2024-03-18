@@ -6,7 +6,7 @@
 /*   By: juliensarda <juliensarda@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 12:57:42 by jsarda            #+#    #+#             */
-/*   Updated: 2024/03/18 10:43:12 by juliensarda      ###   ########.fr       */
+/*   Updated: 2024/03/18 11:25:14 by juliensarda      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,17 @@ void init_forks(pthread_mutex_t *forks, int philo_num)
 	}
 }
 
-void init_printf_lock(pthread_mutex_t *printf_lock, int philo_num)
+void init_printf_lock(t_philo *philo)
 {
-	int	i;
-
-	i = 0;
-	while (philo_num > i)
-	{
-		safe_mutex(&printf_lock[i], INIT);
-		i++;
-	}
+		safe_mutex(&philo->printf_lock, INIT);
 }
 
-void	philo_init(t_philo *philos, pthread_mutex_t	*forks, pthread_mutex_t *printf_lock)
+void init_meal_lock(t_philo *philo)
+{
+		safe_mutex(&philo->meal_lock, INIT);
+}
+
+void	philo_init(t_philo *philos, pthread_mutex_t	*forks)
 {
 	int	i;
 	
@@ -47,7 +45,6 @@ void	philo_init(t_philo *philos, pthread_mutex_t	*forks, pthread_mutex_t *printf
  		philos[i].eating = 0;
 		philos[i].start_time = get_time_of_day();
 		philos[i].philo_fork = &forks[i];
-		philos[i].printf_lock = &printf_lock[i];
 		philos[i].time_to_eat = philos[0].time_to_eat;
 		philos[i].time_to_sleep = philos[0].time_to_sleep;
 		philos[i].last_meal = 0;

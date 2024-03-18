@@ -6,7 +6,7 @@
 /*   By: juliensarda <juliensarda@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 16:57:10 by jsarda            #+#    #+#             */
-/*   Updated: 2024/03/16 10:51:17 by juliensarda      ###   ########.fr       */
+/*   Updated: 2024/03/18 12:00:21 by juliensarda      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,6 @@ void	parsing_init(t_philo *philo,int argc, char **argv)
 	if (philo->num_of_philos > PHILO_MAX)
 		error_exit("Cannot have more than 200 philosophers !");
 	philo->time_to_die = ft_atol(argv[2]);
-	//printf("time to die in the parsing init : %ld\n" ,philo->time_to_die);
-	// from this function i am getting the time to die
 	philo->time_to_eat = ft_atol(argv[3]);
 	philo->time_to_sleep = ft_atol(argv[4]);
 	if (argc == 6)

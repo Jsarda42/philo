@@ -6,7 +6,7 @@
 /*   By: juliensarda <juliensarda@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 09:08:09 by jsarda            #+#    #+#             */
-/*   Updated: 2024/03/17 18:53:14 by juliensarda      ###   ########.fr       */
+/*   Updated: 2024/03/18 12:00:03 by juliensarda      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,8 @@ void	print_message(int id, char *message, t_philo *philo)
 {
 	size_t	time;
 
-	safe_mutex(philo->printf_lock, LOCK);
+	safe_mutex(&philo->printf_lock, LOCK);
 	time = get_time_of_day() - philo->start_time;
-	//printf("this is the philo start time : %ld\n", philo->start_time);
 	printf("%zu %d %s\n",time, id, message);
-	safe_mutex(philo->printf_lock, UNLOCK);
+	safe_mutex(&philo->printf_lock, UNLOCK);
 }
