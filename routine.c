@@ -6,7 +6,7 @@
 /*   By: juliensarda <juliensarda@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:41:33 by jsarda            #+#    #+#             */
-/*   Updated: 2024/03/16 10:57:54 by juliensarda      ###   ########.fr       */
+/*   Updated: 2024/03/18 10:45:56 by juliensarda      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	eating_routine(t_philo *philo)
 	else
 		safe_mutex(philo->philo_fork, LOCK);
 	print_message(philo->id, "has taken a fork", philo);
+	write(1, "hello\n", 6);
 	if (philo->num_of_philos == 1)
 	{
 		// if there if 1 philo i let him take his fork

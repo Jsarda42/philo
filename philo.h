@@ -52,7 +52,7 @@ typedef struct s_philo
 	long			num_of_philos;
 	pthread_mutex_t	*philo_fork;
 	pthread_mutex_t	*neighbor_fork;
-	pthread_mutex_t *print_lock;
+	pthread_mutex_t *printf_lock;
 }					t_philo;
 
 // error
@@ -66,8 +66,9 @@ void	usleep_breakdown(size_t time_ms);
 
 // init
 void				parsing_init(t_philo *table,int argc,  char **argv);
-void				philo_init(t_philo *philos, pthread_mutex_t	*forks);
+void				philo_init(t_philo *philos, pthread_mutex_t	*forks, pthread_mutex_t	*printf_lock);
 void				init_forks(pthread_mutex_t *forks, int philo_num);
+void init_printf_lock(pthread_mutex_t *printf_lock, int philo_num);
 
 // safe
 void				safe_thread(pthread_t *thread, void *(*foo)(void *),
