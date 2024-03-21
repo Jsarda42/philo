@@ -6,7 +6,7 @@
 /*   By: juliensarda <juliensarda@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 12:57:42 by jsarda            #+#    #+#             */
-/*   Updated: 2024/03/18 11:25:14 by juliensarda      ###   ########.fr       */
+/*   Updated: 2024/03/21 09:18:11 by juliensarda      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	philo_init(t_philo *philos, pthread_mutex_t	*forks)
 	int	i;
 	
 	i = 0;
+	philos->dead = 0;
 	while (i < philos->num_of_philos)
 	{
 		philos[i].id = i + 1;
@@ -47,7 +48,7 @@ void	philo_init(t_philo *philos, pthread_mutex_t	*forks)
 		philos[i].philo_fork = &forks[i];
 		philos[i].time_to_eat = philos[0].time_to_eat;
 		philos[i].time_to_sleep = philos[0].time_to_sleep;
-		philos[i].last_meal = 0;
+		philos[i].last_meal = philos[i].start_time;
 		if (i == 0)
 			philos[i].neighbor_fork = &forks[philos[i].num_of_philos - 1];
 		else

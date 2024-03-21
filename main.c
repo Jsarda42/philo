@@ -6,7 +6,7 @@
 /*   By: juliensarda <juliensarda@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 16:58:57 by jsarda            #+#    #+#             */
-/*   Updated: 2024/03/18 12:00:27 by juliensarda      ###   ########.fr       */
+/*   Updated: 2024/03/21 09:37:53 by juliensarda      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,6 @@ int	main(int argc, char **argv)
 	init_meal_lock(philo);
 	philo_init(philo, forks);
 	ft_threads(philo, threads);
+	printf("program end");
 	return (0);
 }

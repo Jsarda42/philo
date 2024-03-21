@@ -42,6 +42,7 @@ typedef enum e_bool
 typedef struct s_philo
 {
 	int				id;
+	int				dead;
 	int				eating;
 	size_t			last_meal;
 	size_t			start_time;
@@ -50,8 +51,8 @@ typedef struct s_philo
 	long			time_to_sleep;
 	long			num_times_to_eat;
 	long			num_of_philos;
-	pthread_mutex_t	*philo_fork;
 	pthread_mutex_t	*neighbor_fork;
+	pthread_mutex_t	*philo_fork;
 	pthread_mutex_t printf_lock;
 	pthread_mutex_t	meal_lock;
 }					t_philo;
@@ -83,7 +84,7 @@ void	eating_routine(t_philo *philo);
 void	*philo_routine(void *pointer);
 
 //death
-void *check_death(void *pointer);
+int check_death(t_philo *philo);
 
 // threads
 void ft_threads(t_philo *philo, pthread_t *threads);
