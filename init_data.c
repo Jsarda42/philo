@@ -6,7 +6,7 @@
 /*   By: juliensarda <juliensarda@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 12:57:42 by jsarda            #+#    #+#             */
-/*   Updated: 2024/03/21 11:33:10 by juliensarda      ###   ########.fr       */
+/*   Updated: 2024/03/21 12:53:51 by juliensarda      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ void	philo_init(t_philo *philos, pthread_mutex_t	*forks)
 	
 	i = 0;
 	philos->dead = 0;
-	init_forks(forks, philos->num_of_philos);
 	init_meal_lock(philos);
 	init_dead_lock(philos);
 	init_printf_lock(philos);
@@ -64,6 +63,7 @@ void	philo_init(t_philo *philos, pthread_mutex_t	*forks)
 			philos[i].neighbor_fork = &forks[i - 1];
 		i++;
 	}
+	init_forks(forks, philos->num_of_philos);
 }
 
 
