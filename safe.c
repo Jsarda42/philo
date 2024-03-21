@@ -6,22 +6,11 @@
 /*   By: juliensarda <juliensarda@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:49:37 by jsarda            #+#    #+#             */
-/*   Updated: 2024/03/18 11:59:46 by juliensarda      ###   ########.fr       */
+/*   Updated: 2024/03/21 11:34:58 by juliensarda      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-void	*safe_malloc(size_t bytes)
-{
-	void	*ret;
-
-	ret = malloc(bytes);
-	if (ret)
-		error_exit("Error allocating memory");
-	return (ret);
-}
-
 
 static void	mutex_error(int status, t_operation operation)
 {

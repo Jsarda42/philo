@@ -6,7 +6,7 @@
 /*   By: juliensarda <juliensarda@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 12:09:01 by juliensarda       #+#    #+#             */
-/*   Updated: 2024/03/21 09:46:50 by juliensarda      ###   ########.fr       */
+/*   Updated: 2024/03/21 11:34:12 by juliensarda      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,12 @@ void	destory_all(t_philo *philo, pthread_mutex_t *forks)
 	int	i;
 
 	i = 0;
-	pthread_mutex_destroy(&philo->printf_lock);
-	pthread_mutex_destroy(&philo->meal_lock);
+	safe_mutex(&philo->printf_lock, DESTROY);
+	safe_mutex(&philo->meal_lock, DESTROY);
+    safe_mutex(&philo->dead_lock, DESTROY);
 	while (i < philo->num_of_philos)
 	{
-		pthread_mutex_destroy(&forks[i]);
+        safe_mutex(&forks[i], DESTROY);
 		i++;
 	}
 }
@@ -36,7 +37,9 @@ int check_death(t_philo *philo)
     if (get_time_of_day() -  last_meal_tmp >= (size_t)philo->time_to_die)
     {
         print_message(philo->id, "philo died", philo);
+        safe_mutex(&philo->dead_lock, LOCK);
         philo->dead = 1;
+        safe_mutex(&philo->dead_lock, UNLOCK);
         return (0);
     }
     return (1);

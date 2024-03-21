@@ -6,7 +6,7 @@
 /*   By: juliensarda <juliensarda@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 09:08:09 by jsarda            #+#    #+#             */
-/*   Updated: 2024/03/18 16:30:21 by juliensarda      ###   ########.fr       */
+/*   Updated: 2024/03/21 11:29:26 by juliensarda      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,16 @@ size_t	get_time_of_day(void)
 void	print_message(int id, char *message, t_philo *philo)
 {
 	size_t	time;
+	int		is_dead;
 
-	safe_mutex(&philo->printf_lock, LOCK);
-	time = get_time_of_day() - philo->start_time;
-	printf("%zu %d %s\n",time, id, message);
-	safe_mutex(&philo->printf_lock, UNLOCK);
+	safe_mutex(&philo->dead_lock, LOCK);
+	is_dead = philo->dead;
+	if (is_dead == 0)
+	{
+		safe_mutex(&philo->printf_lock, LOCK);
+		time = get_time_of_day() - philo->start_time;
+		printf("%zu %d %s\n",time, id, message);
+	}
+	safe_mutex(&philo->dead_lock, UNLOCK);
+	return (0);
 }

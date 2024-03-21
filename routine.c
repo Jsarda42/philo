@@ -6,7 +6,7 @@
 /*   By: juliensarda <juliensarda@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:41:33 by jsarda            #+#    #+#             */
-/*   Updated: 2024/03/21 09:37:01 by juliensarda      ###   ########.fr       */
+/*   Updated: 2024/03/21 11:29:58 by juliensarda      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,14 @@ void	sleeping_routine(t_philo *philo)
 void	*philo_routine(void *pointer)
 {
 	t_philo *philo = (t_philo *)pointer;
+	
 	if (!philo)
 		return (NULL);
 	while (philo->dead == 0)
 	{
-		if (philo->dead == 0)
-			eating_routine(philo);
-		if (philo->dead == 0)
-			sleeping_routine(philo);
-		if (philo->dead == 0)
-			print_message(philo->id, "is thinking", philo);
+		eating_routine(philo);
+		sleeping_routine(philo);
+		print_message(philo->id, "is thinking", philo);
 	}
 	return (NULL);
 }
