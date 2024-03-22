@@ -1,29 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   init_lock.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juliensarda <juliensarda@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/07 16:58:57 by jsarda            #+#    #+#             */
+/*   Created: 2024/03/21 17:38:10 by juliensarda       #+#    #+#             */
 /*   Updated: 2024/03/22 13:09:55 by juliensarda      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	main(int argc, char **argv)
+void init_printf_lock(t_philo *philo)
 {
-	t_philo			philo[PHILO_MAX];
-	pthread_mutex_t	forks[PHILO_MAX];
-	pthread_t threads[PHILO_MAX + 1];
-	
-	if (argc != 5 && argc != 6)
-		error_exit("The arguments must be 5 or 6");
-	parsing_init(philo, argc, argv);
-	init_lock(philo);
-	philo_init(philo, forks);
-	ft_threads(philo, threads);
-	destory_all(philo, forks);
-	return (0);
+		safe_mutex(&philo->printf_lock, INIT);
+}
+
+void init_dead_lock(t_philo *philo)
+{
+		safe_mutex(&philo->dead_lock, INIT);
+}
+
+void init_meal_lock(t_philo *philo)
+{
+		safe_mutex(&philo->meal_lock, INIT);
+}
+
+void init_lock(t_philo *philo)
+{
+	init_meal_lock(philo);
+	init_dead_lock(philo);
+	init_printf_lock(philo);
 }

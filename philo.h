@@ -74,6 +74,7 @@ void				init_forks(pthread_mutex_t *forks, int philo_num);
 void init_printf_lock(t_philo *philo);
 void init_meal_lock(t_philo *philo);
 void init_dead_lock(t_philo *philo);
+void init_lock(t_philo *philo);
 
 // safe
 void				safe_thread(pthread_t *thread, void *(*foo)(void *),

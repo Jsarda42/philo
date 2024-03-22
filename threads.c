@@ -6,7 +6,7 @@
 /*   By: juliensarda <juliensarda@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 17:20:25 by juliensarda       #+#    #+#             */
-/*   Updated: 2024/03/21 14:23:03 by juliensarda      ###   ########.fr       */
+/*   Updated: 2024/03/21 16:26:10 by juliensarda      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,21 @@ void ft_threads(t_philo *philo, pthread_t *threads)
 	    safe_thread(&threads[i], philo_routine, &philo[i], CREATE);
         i++;
     }
-    while (check_death(philo))
-        ;
     i = 0;
     while (i < philo->num_of_philos)
     {
-        safe_mutex(&philo->dead_lock, LOCK);
+        if(check_death(&philo[i]) == 0)
+            break ;
+        i++;
+    }
+    i = -1;
+    while (++i < philo->num_of_philos)
+    {
+        safe_mutex(&philo[i].dead_lock, LOCK);
         philo[i].dead = 1;
-        safe_mutex(&philo->dead_lock, UNLOCK);
-        i++;
+        safe_mutex(&philo[i].dead_lock, UNLOCK);
     }
-    i = 0;
-    while (i < philo->num_of_philos)
-    {
+    i = -1;
+    while (++i < philo->num_of_philos)
 	   safe_thread(&threads[i], NULL, NULL, JOIN);
-        i++;
-    }
 }

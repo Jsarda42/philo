@@ -6,7 +6,7 @@
 /*   By: juliensarda <juliensarda@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:41:33 by jsarda            #+#    #+#             */
-/*   Updated: 2024/03/21 14:09:39 by juliensarda      ###   ########.fr       */
+/*   Updated: 2024/03/21 17:33:27 by juliensarda      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,38 +46,11 @@ void	sleeping_routine(t_philo *philo)
 void	*philo_routine(void *pointer)
 {
 	t_philo *philo = (t_philo *)pointer;
-	//int is_dead;
 	
 	if (!philo)
 		return (NULL);
-	// safe_mutex(&philo->dead_lock, LOCK);
-	// is_dead = philo->dead;
-	// safe_mutex(&philo->dead_lock, UNLOCK);
-	// while (philo->dead == 0)
-	// {
-		eating_routine(philo);
-		sleeping_routine(philo);
-		print_message(philo->id, "is thinking", philo);
-	// }
+	eating_routine(philo);
+	sleeping_routine(philo);
+	print_message(philo->id, "is thinking", philo);
 	return (NULL);
 }
-
-// void	*philo_routine(void *pointer)
-// {
-// 	t_philo *philo = (t_philo *)pointer;
-	
-// 	if (!philo)
-// 		return (NULL);
-// 	int		is_dead;
-
-// 	is_dead = philo->dead;
-// 	while (is_dead == 0)
-// 	{
-// 		safe_mutex(&philo->dead_lock, LOCK);
-// 		eating_routine(philo);
-// 		sleeping_routine(philo);p
-// 		print_message(philo->id, "is thinking", philo);
-// 		safe_mutex(&philo->dead_lock, UNLOCK);
-// 	}
-// 	return (NULL);
-// }
