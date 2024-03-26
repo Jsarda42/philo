@@ -39,23 +39,34 @@ typedef enum e_bool
 	true
 }					t_bool;
 
-typedef struct s_philo
+typedef	struct s_prog
 {
-	int				id;
 	int				dead;
-	int				eating;
-	size_t			last_meal;
-	size_t			start_time;
-	long			time_to_die;
-	long			time_to_eat;
-	long			time_to_sleep;
-	long			num_times_to_eat;
-	long			num_of_philos;
-	pthread_mutex_t	*neighbor_fork;
-	pthread_mutex_t	*philo_fork;
 	pthread_mutex_t printf_lock;
 	pthread_mutex_t dead_lock;
 	pthread_mutex_t	meal_lock;
+} t_prog;
+
+typedef struct s_philo
+{
+	pthread_t		thread;
+	int				id;
+	int	*dead;
+	// eating
+	// meal eaten
+	size_t			last_meal;
+	long			time_to_die;
+	long			time_to_eat;
+	long			time_to_sleep;
+	size_t			start_time;
+	long			num_of_philos;
+	pthread_mutex_t	*neighbor_fork;
+	pthread_mutex_t	*philo_fork;
+	pthread_mutex_t *printf_lock;
+	pthread_mutex_t *dead_lock;
+	pthread_mutex_t	*meal_lock;	
+	long			num_times_to_eat;
+	t_prog			*prog;
 }					t_philo;
 
 // error
@@ -69,12 +80,10 @@ void	usleep_breakdown(size_t time_ms);
 
 // init
 void				parsing_init(t_philo *table,int argc,  char **argv);
-void				philo_init(t_philo *philos, pthread_mutex_t	*forks);
-void				init_forks(pthread_mutex_t *forks, int philo_num);
-void init_printf_lock(t_philo *philo);
-void init_meal_lock(t_philo *philo);
-void init_dead_lock(t_philo *philo);
-void init_lock(t_philo *philo);
+void	init_all(t_prog *prog, t_philo *philos, pthread_mutex_t *forks);
+
+// threads
+void ft_threads(t_philo *philo);
 
 // safe
 void				safe_thread(pthread_t *thread, void *(*foo)(void *),
@@ -89,7 +98,5 @@ void	*philo_routine(void *pointer);
 int check_death(t_philo *philo);
 void	destory_all(t_philo *philo, pthread_mutex_t *forks);
 
-// threads
-void ft_threads(t_philo *philo, pthread_t *threads);
 
 #endif

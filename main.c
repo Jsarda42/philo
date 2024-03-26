@@ -6,7 +6,7 @@
 /*   By: juliensarda <juliensarda@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 16:58:57 by jsarda            #+#    #+#             */
-/*   Updated: 2024/03/22 13:09:55 by juliensarda      ###   ########.fr       */
+/*   Updated: 2024/03/26 13:51:53 by juliensarda      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,15 @@
 
 int	main(int argc, char **argv)
 {
+	t_prog			prog;
 	t_philo			philo[PHILO_MAX];
 	pthread_mutex_t	forks[PHILO_MAX];
-	pthread_t threads[PHILO_MAX + 1];
 	
 	if (argc != 5 && argc != 6)
 		error_exit("The arguments must be 5 or 6");
 	parsing_init(philo, argc, argv);
-	init_lock(philo);
-	philo_init(philo, forks);
-	ft_threads(philo, threads);
-	destory_all(philo, forks);
+	init_all(&prog, philo, forks);
+	ft_threads(philo);
+	// destory_all(philo, forks);
 	return (0);
 }

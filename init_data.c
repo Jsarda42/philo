@@ -6,11 +6,42 @@
 /*   By: juliensarda <juliensarda@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 12:57:42 by jsarda            #+#    #+#             */
-/*   Updated: 2024/03/21 17:45:51 by juliensarda      ###   ########.fr       */
+/*   Updated: 2024/03/26 14:11:12 by juliensarda      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void	init_prog(t_prog *prog)
+{
+	prog->dead = 0;
+	safe_mutex(&prog->printf_lock, INIT);
+	safe_mutex(&prog->dead_lock, INIT);
+	safe_mutex(&prog->meal_lock, INIT);
+}
+
+void	philo_init(t_prog *prog, t_philo *philos, pthread_mutex_t	*forks)
+{
+	int	i;
+	
+	i = 0;
+	while (i < philos->num_of_philos)
+	{
+		philos[i].dead = &prog->dead;
+		philos[i].id = i + 1;
+		philos[i].start_time = get_time_of_day();
+		philos[i].philo_fork = &forks[i];
+		philos[i].last_meal = philos[i].start_time;
+		philos[i].time_to_eat = philos->time_to_eat;
+		philos[i].time_to_sleep = philos->time_to_sleep;
+		philos[i].time_to_die = philos->time_to_die;
+		if (i == 0)
+			philos[i].neighbor_fork = &forks[philos[i].num_of_philos - 1];
+		else
+			philos[i].neighbor_fork = &forks[i - 1];
+		i++;
+	}
+}
 
 void init_forks(pthread_mutex_t *forks, int philo_num)
 {
@@ -24,27 +55,11 @@ void init_forks(pthread_mutex_t *forks, int philo_num)
 	}
 }
 
-void	philo_init(t_philo *philos, pthread_mutex_t	*forks)
+void	init_all(t_prog *prog, t_philo *philos, pthread_mutex_t *forks)
 {
-	int	i;
-	
-	i = 0;
-	while (i < philos->num_of_philos)
-	{
-		philos[i].dead = 0;
-		philos[i].id = i + 1;
- 		philos[i].eating = 0;
-		philos[i].start_time = get_time_of_day();
-		philos[i].philo_fork = &forks[i];
-		philos[i].time_to_eat = philos[0].time_to_eat;
-		philos[i].time_to_sleep = philos[0].time_to_sleep;
-		philos[i].last_meal = philos[i].start_time;
-		if (i == 0)
-			philos[i].neighbor_fork = &forks[philos[i].num_of_philos - 1];
-		else
-			philos[i].neighbor_fork = &forks[i - 1];
-		i++;
-	}
+	init_prog(prog);
+	philos->prog = prog;
+	philo_init(prog, philos, forks);
 	init_forks(forks, philos->num_of_philos);
 }
 

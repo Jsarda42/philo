@@ -1,5 +1,5 @@
 NAME = philo
-SRCS = $(wildcard *.c)
+SRCS = parsing.c init_data.c utils.c safe.c main.c threads.c routine.c
 OBJS = ${SRCS:.c=.o}
 CFLAGS = -Werror -Wextra -Wall -lpthread -g -O3
 CC = cc
