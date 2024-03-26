@@ -41,7 +41,7 @@ typedef enum e_bool
 
 typedef	struct s_prog
 {
-	int				dead;
+	int				dead_flag;
 	pthread_mutex_t printf_lock;
 	pthread_mutex_t dead_lock;
 	pthread_mutex_t	meal_lock;
@@ -49,24 +49,25 @@ typedef	struct s_prog
 
 typedef struct s_philo
 {
-	pthread_t		thread;
 	int				id;
-	int	*dead;
-	// eating
-	// meal eaten
-	size_t			last_meal;
+	int				*dead;
 	long			time_to_die;
 	long			time_to_eat;
 	long			time_to_sleep;
-	size_t			start_time;
 	long			num_of_philos;
+	long			num_times_to_eat;
 	pthread_mutex_t	*neighbor_fork;
-	pthread_mutex_t	*philo_fork;
 	pthread_mutex_t *printf_lock;
+	pthread_mutex_t	*philo_fork;
 	pthread_mutex_t *dead_lock;
 	pthread_mutex_t	*meal_lock;	
-	long			num_times_to_eat;
+	size_t			start_time;
+	size_t			last_meal;
+	pthread_t		thread;
 	t_prog			*prog;
+	// this is to implement the last arg
+	// eating
+	// meal eaten
 }					t_philo;
 
 // error

@@ -6,7 +6,7 @@
 /*   By: juliensarda <juliensarda@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 12:57:42 by jsarda            #+#    #+#             */
-/*   Updated: 2024/03/26 14:11:12 by juliensarda      ###   ########.fr       */
+/*   Updated: 2024/03/26 15:21:58 by juliensarda      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	init_prog(t_prog *prog)
 {
-	prog->dead = 0;
+	prog->dead_flag = 0;
 	safe_mutex(&prog->printf_lock, INIT);
 	safe_mutex(&prog->dead_lock, INIT);
 	safe_mutex(&prog->meal_lock, INIT);
@@ -27,7 +27,10 @@ void	philo_init(t_prog *prog, t_philo *philos, pthread_mutex_t	*forks)
 	i = 0;
 	while (i < philos->num_of_philos)
 	{
-		philos[i].dead = &prog->dead;
+		philos[i].dead = &prog->dead_flag;
+		philos[i].printf_lock = &prog->printf_lock;
+		philos[i].dead_lock = &prog->dead_lock;
+		philos[i].meal_lock = &prog->meal_lock;
 		philos[i].id = i + 1;
 		philos[i].start_time = get_time_of_day();
 		philos[i].philo_fork = &forks[i];
@@ -35,6 +38,7 @@ void	philo_init(t_prog *prog, t_philo *philos, pthread_mutex_t	*forks)
 		philos[i].time_to_eat = philos->time_to_eat;
 		philos[i].time_to_sleep = philos->time_to_sleep;
 		philos[i].time_to_die = philos->time_to_die;
+		philos[i].prog = prog;
 		if (i == 0)
 			philos[i].neighbor_fork = &forks[philos[i].num_of_philos - 1];
 		else
@@ -58,7 +62,6 @@ void init_forks(pthread_mutex_t *forks, int philo_num)
 void	init_all(t_prog *prog, t_philo *philos, pthread_mutex_t *forks)
 {
 	init_prog(prog);
-	philos->prog = prog;
 	philo_init(prog, philos, forks);
 	init_forks(forks, philos->num_of_philos);
 }

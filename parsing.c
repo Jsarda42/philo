@@ -6,7 +6,7 @@
 /*   By: juliensarda <juliensarda@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 16:57:10 by jsarda            #+#    #+#             */
-/*   Updated: 2024/03/26 13:22:03 by juliensarda      ###   ########.fr       */
+/*   Updated: 2024/03/26 15:24:51 by juliensarda      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static long	ft_atol(char *str)
 	return (num);
 }
 
-void	parsing_init(t_philo *philo,int argc, char **argv)
+void	parsing_init(t_philo *philo, int argc, char **argv)
 {
 	philo->num_of_philos = ft_atol(argv[1]);
 	if (philo->num_of_philos > PHILO_MAX)
