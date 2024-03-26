@@ -50,7 +50,6 @@ typedef	struct s_prog
 typedef struct s_philo
 {
 	int				id;
-	int				*dead;
 	long			time_to_die;
 	long			time_to_eat;
 	long			time_to_sleep;

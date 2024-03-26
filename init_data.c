@@ -6,7 +6,7 @@
 /*   By: juliensarda <juliensarda@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 12:57:42 by jsarda            #+#    #+#             */
-/*   Updated: 2024/03/26 16:00:05 by juliensarda      ###   ########.fr       */
+/*   Updated: 2024/03/26 16:22:53 by juliensarda      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	philo_init(t_prog *prog, t_philo *philos, pthread_mutex_t	*forks)
 	i = 0;
 	while (i < philos->num_of_philos)
 	{
-		philos[i].dead = &prog->dead_flag;
 		philos[i].id = i + 1;
 		philos[i].start_time = get_time_of_day();
 		philos[i].philo_fork = &forks[i];

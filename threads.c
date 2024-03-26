@@ -6,7 +6,7 @@
 /*   By: juliensarda <juliensarda@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 17:20:25 by juliensarda       #+#    #+#             */
-/*   Updated: 2024/03/26 14:54:53 by juliensarda      ###   ########.fr       */
+/*   Updated: 2024/03/26 16:32:55 by juliensarda      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,6 @@ void ft_threads(t_philo *philos)
     //     if(check_death(&philos[i]) == 0)
     //         break ;
     //     i++;
-    // }
-    // i = -1;
-    // while (++i < philos->num_of_philos)
-    // {
-    //     safe_mutex(philos[i].dead_lock, LOCK);
-    //     // philos[i].dead;
-    //     safe_mutex(philos[i].dead_lock, UNLOCK);
     // }
     i = -1;
     while (++i < philos->num_of_philos)
