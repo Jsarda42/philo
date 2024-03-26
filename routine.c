@@ -6,7 +6,7 @@
 /*   By: juliensarda <juliensarda@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:41:33 by jsarda            #+#    #+#             */
-/*   Updated: 2024/03/26 14:42:56 by juliensarda      ###   ########.fr       */
+/*   Updated: 2024/03/26 16:10:52 by juliensarda      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ void	eating_routine(t_philo *philo)
 	 	safe_mutex(philo->neighbor_fork, LOCK);
 	print_message(philo->id, "has taken a fork", philo);
 	
-	safe_mutex(philo->meal_lock, LOCK);
+	safe_mutex(&philo->prog->meal_lock, LOCK);
 	philo->last_meal = get_time_of_day();
-	safe_mutex(philo->meal_lock, UNLOCK);
+	safe_mutex(&philo->prog->meal_lock, UNLOCK);
 
 	
     print_message(philo->id, "is eating", philo);
@@ -49,8 +49,11 @@ void	*philo_routine(void *pointer)
 	
 	if (!philo)
 		return (NULL);
-	eating_routine(philo);
-	sleeping_routine(philo);
-	print_message(philo->id, "is thinking", philo);
+	while (check_death(philo) == 0)
+	{
+		eating_routine(philo);
+		sleeping_routine(philo);
+		print_message(philo->id, "is thinking", philo);
+	}
 	return (NULL);
 }

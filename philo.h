@@ -57,10 +57,7 @@ typedef struct s_philo
 	long			num_of_philos;
 	long			num_times_to_eat;
 	pthread_mutex_t	*neighbor_fork;
-	pthread_mutex_t *printf_lock;
 	pthread_mutex_t	*philo_fork;
-	pthread_mutex_t *dead_lock;
-	pthread_mutex_t	*meal_lock;	
 	size_t			start_time;
 	size_t			last_meal;
 	pthread_t		thread;
