@@ -6,7 +6,7 @@
 /*   By: juliensarda <juliensarda@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 09:08:09 by jsarda            #+#    #+#             */
-/*   Updated: 2024/03/26 16:01:25 by juliensarda      ###   ########.fr       */
+/*   Updated: 2024/03/27 08:41:07 by juliensarda      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,18 +55,6 @@ size_t	get_time_of_day(void)
 	if (gettimeofday(&current_time, NULL) == -1)
 		error_exit("Erreur getting the time");
 	return ((current_time.tv_sec * 1000) + current_time.tv_usec / 1000);
-}
-
-int	is_philo_dead(t_philo *philo)
-{
-	safe_mutex(&philo->prog->dead_lock, LOCK);
-	if(philo->prog->dead_flag == 1)
-	{
-		safe_mutex(&philo->prog->dead_lock, UNLOCK);
-		return (1);
-	}
-	safe_mutex(&philo->prog->dead_lock, UNLOCK);
-	return (0);
 }
 
 void	print_message(int id, char *message, t_philo *philo)

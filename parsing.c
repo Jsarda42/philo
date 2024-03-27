@@ -6,7 +6,7 @@
 /*   By: juliensarda <juliensarda@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 16:57:10 by jsarda            #+#    #+#             */
-/*   Updated: 2024/03/26 15:24:51 by juliensarda      ###   ########.fr       */
+/*   Updated: 2024/03/27 11:46:02 by juliensarda      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,6 @@ void	parsing_init(t_philo *philo, int argc, char **argv)
 	philo->time_to_sleep = ft_atol(argv[4]);
 	if (argc == 6)
 		philo->num_times_to_eat = ft_atol(argv[5]);
+	else
+		philo->num_times_to_eat = -1;
 }

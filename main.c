@@ -6,7 +6,7 @@
 /*   By: juliensarda <juliensarda@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 16:58:57 by jsarda            #+#    #+#             */
-/*   Updated: 2024/03/26 15:25:13 by juliensarda      ###   ########.fr       */
+/*   Updated: 2024/03/27 11:29:12 by juliensarda      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ int	main(int argc, char **argv)
 	parsing_init(philo, argc, argv);
 	init_all(&prog, philo, forks);
 	ft_threads(philo);
-	// destory_all(philo, forks);
+	destory_all(philo, forks);
 	return (0);
 }

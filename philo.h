@@ -61,9 +61,7 @@ typedef struct s_philo
 	size_t			last_meal;
 	pthread_t		thread;
 	t_prog			*prog;
-	// this is to implement the last arg
-	// eating
-	// meal eaten
+	long meal_eaten;
 }					t_philo;
 
 // error
@@ -94,6 +92,10 @@ void	*philo_routine(void *pointer);
 //death
 int check_death(t_philo *philo);
 void	destory_all(t_philo *philo, pthread_mutex_t *forks);
+
+// check
+int all_eaten(t_philo *philo);
+int	is_philo_dead(t_philo *philo);
 
 
 #endif
