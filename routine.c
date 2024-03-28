@@ -79,6 +79,7 @@ void	*philo_routine(void *pointer)
 		eating_routine(philo);
 		sleeping_routine(philo);
 		print_message(philo->id, "is thinking", philo);
+		usleep_breakdown(philo->threshold);
 	}
 	return (NULL);
 }

@@ -1,7 +1,7 @@
 NAME = philo
 SRCS = parsing.c init_data.c utils.c safe.c main.c threads.c routine.c dinner_end.c check_state.c
 OBJS = ${SRCS:.c=.o}
-CFLAGS = -Werror -Wextra -Wall -g -O3
+CFLAGS = -Werror -Wextra -Wall -g3 -O3
 LFLAGS = -lpthread
 CC = cc
 RM = rm -rf

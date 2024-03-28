@@ -65,6 +65,7 @@ typedef struct s_philo
 	long			time_to_die;
 	long			time_to_eat;
 	long			time_to_sleep;
+	long			threshold;
 	long			num_of_philos;
 	long			num_eat;
 	pthread_mutex_t	*neighbor_fork;

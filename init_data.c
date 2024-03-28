@@ -36,6 +36,8 @@ void	philo_init(t_prog *prog, t_philo *philos, pthread_mutex_t *forks)
 		philos[i].time_to_sleep = philos->time_to_sleep;
 		philos[i].time_to_die = philos->time_to_die;
 		philos[i].num_eat = philos->num_eat;
+		philos[i].threshold = (philos->time_to_die
+				- (philos->time_to_eat + philos->time_to_sleep)) / 2;
 		philos[i].prog = prog;
 		if (i == 0)
 			philos[i].neighbor_fork = &forks[philos[i].num_of_philos - 1];
@@ -60,6 +62,6 @@ void	init_forks(pthread_mutex_t *forks, int philo_num)
 void	init_all(t_prog *prog, t_philo *philos, pthread_mutex_t *forks)
 {
 	init_prog(prog);
-	philo_init(prog, philos, forks);
 	init_forks(forks, philos->num_of_philos);
+	philo_init(prog, philos, forks);
 }
