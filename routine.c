@@ -6,11 +6,21 @@
 /*   By: jsarda <jsarda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:41:33 by jsarda            #+#    #+#             */
-/*   Updated: 2024/03/28 13:47:12 by jsarda           ###   ########.fr       */
+/*   Updated: 2024/03/28 18:37:13 by jsarda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+int	mutex_dead_flag_lock(t_philo *philo)
+{
+	int	tmp_dead_flag;
+
+	safe_mutex(&philo->prog->dead_lock, LOCK);
+	tmp_dead_flag = philo->prog->dead_flag;
+	safe_mutex(&philo->prog->dead_lock, UNLOCK);
+	return (tmp_dead_flag);
+}
 
 void	manage_one_philo(t_philo *philo)
 {
@@ -63,23 +73,22 @@ void	*philo_routine(void *pointer)
 	int		tmp_dead_flag;
 
 	philo = (t_philo *)pointer;
+	tmp_dead_flag = mutex_dead_flag_lock(philo);
 	if (!philo)
 		return (NULL);
-	safe_mutex(&philo->prog->dead_lock, LOCK);
-	tmp_dead_flag = philo->prog->dead_flag;
-	safe_mutex(&philo->prog->dead_lock, UNLOCK);
 	if (philo->id % 2 == 0)
 		usleep_breakdown(philo->time_to_eat);
 	while (tmp_dead_flag != 1 && (philo->num_eat == -1
 			|| philo->meal_eaten < philo->num_eat))
 	{
-		safe_mutex(&philo->prog->dead_lock, LOCK);
-		tmp_dead_flag = philo->prog->dead_flag;
-		safe_mutex(&philo->prog->dead_lock, UNLOCK);
 		eating_routine(philo);
-		sleeping_routine(philo);
-		print_message(philo->id, "is thinking", philo);
-		usleep_breakdown(philo->threshold);
+		tmp_dead_flag = mutex_dead_flag_lock(philo);
+		if (!tmp_dead_flag)
+		{
+			sleeping_routine(philo);
+			print_message(philo->id, "is thinking", philo);
+			usleep_breakdown(philo->threshold);
+		}
 	}
 	return (NULL);
 }
