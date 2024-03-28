@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juliensarda <juliensarda@student.42.fr>    +#+  +:+       +#+        */
+/*   By: jsarda <jsarda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 16:57:10 by jsarda            #+#    #+#             */
-/*   Updated: 2024/03/27 11:46:02 by juliensarda      ###   ########.fr       */
+/*   Updated: 2024/03/28 13:23:38 by jsarda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,13 @@ static long	ft_atol(char *str)
 void	parsing_init(t_philo *philo, int argc, char **argv)
 {
 	philo->num_of_philos = ft_atol(argv[1]);
-	if (philo->num_of_philos > PHILO_MAX)
-		error_exit("Cannot have more than 200 philosophers !");
+	if (philo->num_of_philos > PHILO_MAX || philo->num_of_philos <= 0)
+		error_exit("philo number need to be between 1 and 200!!");
 	philo->time_to_die = ft_atol(argv[2]);
 	philo->time_to_eat = ft_atol(argv[3]);
 	philo->time_to_sleep = ft_atol(argv[4]);
 	if (argc == 6)
-		philo->num_times_to_eat = ft_atol(argv[5]);
+		philo->num_eat = ft_atol(argv[5]);
 	else
-		philo->num_times_to_eat = -1;
+		philo->num_eat = -1;
 }

@@ -3,32 +3,47 @@
 /*                                                        :::      ::::::::   */
 /*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juliensarda <juliensarda@student.42.fr>    +#+  +:+       +#+        */
+/*   By: jsarda <jsarda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:41:33 by jsarda            #+#    #+#             */
-/*   Updated: 2024/03/27 12:02:36 by juliensarda      ###   ########.fr       */
+/*   Updated: 2024/03/28 13:47:12 by jsarda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+void	manage_one_philo(t_philo *philo)
+{
+	usleep_breakdown(philo->time_to_die);
+	print_message(philo->id, "died", philo);
+	safe_mutex(philo->philo_fork, UNLOCK);
+	safe_mutex(&philo->prog->dead_lock, LOCK);
+	philo->prog->dead_flag = 1;
+	safe_mutex(&philo->prog->dead_lock, UNLOCK);
+}
+
 void	eating_routine(t_philo *philo)
 {
 	if (philo->id % 2 == 0)
-	 	safe_mutex(philo->neighbor_fork, LOCK);
+		safe_mutex(philo->neighbor_fork, LOCK);
 	else
-	 	safe_mutex(philo->philo_fork, LOCK);
+		safe_mutex(philo->philo_fork, LOCK);
 	print_message(philo->id, "has taken a fork", philo);
+	if (philo->num_of_philos == 1)
+	{
+		manage_one_philo(philo);
+		return ;
+	}
 	if (philo->id % 2 == 0)
-	 	safe_mutex(philo->philo_fork, LOCK);
+		safe_mutex(philo->philo_fork, LOCK);
 	else
-	 	safe_mutex(philo->neighbor_fork, LOCK);
+		safe_mutex(philo->neighbor_fork, LOCK);
 	print_message(philo->id, "has taken a fork", philo);
 	safe_mutex(&philo->prog->meal_lock, LOCK);
 	philo->last_meal = get_time_of_day();
 	safe_mutex(&philo->prog->meal_lock, UNLOCK);
-    print_message(philo->id, "is eating", philo);
-    usleep_breakdown(philo->time_to_eat);
+	print_message(philo->id, "is eating", philo);
+	usleep_breakdown(philo->time_to_eat);
 	safe_mutex(&philo->prog->meal_lock, LOCK);
 	philo->meal_eaten = philo->meal_eaten + 1;
 	safe_mutex(&philo->prog->meal_lock, UNLOCK);
@@ -38,21 +53,25 @@ void	eating_routine(t_philo *philo)
 
 void	sleeping_routine(t_philo *philo)
 {
-	   	print_message(philo->id, "is sleeping", philo);
-		usleep_breakdown(philo->time_to_sleep);
+	print_message(philo->id, "is sleeping", philo);
+	usleep_breakdown(philo->time_to_sleep);
 }
 
 void	*philo_routine(void *pointer)
 {
-	t_philo *philo = (t_philo *)pointer;
-	int tmp_dead_flag;
-	
+	t_philo	*philo;
+	int		tmp_dead_flag;
+
+	philo = (t_philo *)pointer;
 	if (!philo)
 		return (NULL);
 	safe_mutex(&philo->prog->dead_lock, LOCK);
 	tmp_dead_flag = philo->prog->dead_flag;
 	safe_mutex(&philo->prog->dead_lock, UNLOCK);
-	while (tmp_dead_flag != 1 && (philo->num_times_to_eat <= 0 || philo->meal_eaten < philo->num_times_to_eat))
+	if (philo->id % 2 == 0)
+		usleep_breakdown(philo->time_to_eat);
+	while (tmp_dead_flag != 1 && (philo->num_eat == -1
+			|| philo->meal_eaten < philo->num_eat))
 	{
 		safe_mutex(&philo->prog->dead_lock, LOCK);
 		tmp_dead_flag = philo->prog->dead_flag;

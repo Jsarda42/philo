@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jsarda <jsarda@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/27 14:19:59 by jsarda            #+#    #+#             */
+/*   Updated: 2024/03/28 13:23:38 by jsarda           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PHILO_H
 # define PHILO_H
 
@@ -39,13 +51,13 @@ typedef enum e_bool
 	true
 }					t_bool;
 
-typedef	struct s_prog
+typedef struct s_prog
 {
 	int				dead_flag;
-	pthread_mutex_t printf_lock;
-	pthread_mutex_t dead_lock;
+	pthread_mutex_t	printf_lock;
+	pthread_mutex_t	dead_lock;
 	pthread_mutex_t	meal_lock;
-} t_prog;
+}					t_prog;
 
 typedef struct s_philo
 {
@@ -54,14 +66,14 @@ typedef struct s_philo
 	long			time_to_eat;
 	long			time_to_sleep;
 	long			num_of_philos;
-	long			num_times_to_eat;
+	long			num_eat;
 	pthread_mutex_t	*neighbor_fork;
 	pthread_mutex_t	*philo_fork;
 	size_t			start_time;
 	size_t			last_meal;
 	pthread_t		thread;
 	t_prog			*prog;
-	long meal_eaten;
+	long			meal_eaten;
 }					t_philo;
 
 // error
@@ -70,32 +82,32 @@ void				error_exit(const char *error);
 // utils
 int					ft_strlen(char *str);
 size_t				get_time_of_day(void);
-void	print_message(int id, char *message, t_philo *philo);
-void	usleep_breakdown(size_t time_ms);
+void				print_message(int id, char *message, t_philo *philo);
+void				usleep_breakdown(size_t time_ms);
 
 // init
-void				parsing_init(t_philo *table,int argc,  char **argv);
-void	init_all(t_prog *prog, t_philo *philos, pthread_mutex_t *forks);
+void				parsing_init(t_philo *table, int argc, char **argv);
+void				init_all(t_prog *prog, t_philo *philos,
+						pthread_mutex_t *forks);
 
 // threads
-void ft_threads(t_philo *philo);
+void				ft_threads(t_philo *philo);
 
 // safe
 void				safe_thread(pthread_t *thread, void *(*foo)(void *),
 						t_philo *philo, t_operation operation);
-void	safe_mutex(pthread_mutex_t *mutex, t_operation operation);
+void				safe_mutex(pthread_mutex_t *mutex, t_operation operation);
 
 // routine
-void	eating_routine(t_philo *philo);
-void	*philo_routine(void *pointer);
+void				eating_routine(t_philo *philo);
+void				*philo_routine(void *pointer);
 
-//death
-int check_death(t_philo *philo);
-void	destory_all(t_philo *philo, pthread_mutex_t *forks);
+// death
+int					check_death(t_philo *philo);
+void				destory_all(t_philo *philo, pthread_mutex_t *forks);
 
 // check
-int all_eaten(t_philo *philo);
-int	is_philo_dead(t_philo *philo);
-
+int					all_eaten(t_philo *philo);
+int					is_philo_dead(t_philo *philo);
 
 #endif

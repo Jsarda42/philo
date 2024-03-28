@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juliensarda <juliensarda@student.42.fr>    +#+  +:+       +#+        */
+/*   By: jsarda <jsarda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 12:57:42 by jsarda            #+#    #+#             */
-/*   Updated: 2024/03/26 18:09:19 by juliensarda      ###   ########.fr       */
+/*   Updated: 2024/03/28 13:23:38 by jsarda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ void	init_prog(t_prog *prog)
 	safe_mutex(&prog->meal_lock, INIT);
 }
 
-void	philo_init(t_prog *prog, t_philo *philos, pthread_mutex_t	*forks)
+void	philo_init(t_prog *prog, t_philo *philos, pthread_mutex_t *forks)
 {
 	int	i;
-	
+
 	i = 0;
 	while (i < philos->num_of_philos)
 	{
@@ -35,7 +35,7 @@ void	philo_init(t_prog *prog, t_philo *philos, pthread_mutex_t	*forks)
 		philos[i].time_to_eat = philos->time_to_eat;
 		philos[i].time_to_sleep = philos->time_to_sleep;
 		philos[i].time_to_die = philos->time_to_die;
-		philos[i].num_times_to_eat = philos->num_times_to_eat;
+		philos[i].num_eat = philos->num_eat;
 		philos[i].prog = prog;
 		if (i == 0)
 			philos[i].neighbor_fork = &forks[philos[i].num_of_philos - 1];
@@ -45,7 +45,7 @@ void	philo_init(t_prog *prog, t_philo *philos, pthread_mutex_t	*forks)
 	}
 }
 
-void init_forks(pthread_mutex_t *forks, int philo_num)
+void	init_forks(pthread_mutex_t *forks, int philo_num)
 {
 	int	i;
 
@@ -63,5 +63,3 @@ void	init_all(t_prog *prog, t_philo *philos, pthread_mutex_t *forks)
 	philo_init(prog, philos, forks);
 	init_forks(forks, philos->num_of_philos);
 }
-
-

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   safe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juliensarda <juliensarda@student.42.fr>    +#+  +:+       +#+        */
+/*   By: jsarda <jsarda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:49:37 by jsarda            #+#    #+#             */
-/*   Updated: 2024/03/26 12:02:58 by juliensarda      ###   ########.fr       */
+/*   Updated: 2024/03/27 14:25:58 by jsarda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ static void	mutex_error(int status, t_operation operation)
 		error_exit("The value specified by attr is invalid.");
 	else if (EDEADLK == status)
 		error_exit("A deadlock would occur if the thread "
-					"blocked waiting for mutex.");
+			"blocked waiting for mutex.");
 	else if (EPERM == status)
 		error_exit("The current thread does not hold a lock on mutex.");
 	else if (ENOMEM == status)
 		error_exit("The process cannot allocate enough memory"
-					" to create another mutex.");
+			" to create another mutex.");
 	else if (EBUSY == status)
 		error_exit("Mutex is locked");
 }
@@ -46,10 +46,10 @@ static void	thread_error(int status, t_operation operation)
 		error_exit("The value specified by thread is not joinable\n");
 	else if (ESRCH == status)
 		error_exit("No thread could be found corresponding to that"
-					"specified by the given thread ID, thread.");
+			"specified by the given thread ID, thread.");
 	else if (EDEADLK == status)
 		error_exit("A deadlock was detected or the value of"
-					"thread specifies the calling thread.");
+			"thread specifies the calling thread.");
 }
 
 void	safe_mutex(pthread_mutex_t *mutex, t_operation operation)
@@ -64,7 +64,7 @@ void	safe_mutex(pthread_mutex_t *mutex, t_operation operation)
 		mutex_error(pthread_mutex_destroy(mutex), operation);
 	else
 		error_exit("Wrong operation for mutex_handle:"
-					"use <LOCK> <UNLOCK> <INIT> <DESTROY>");
+			"use <LOCK> <UNLOCK> <INIT> <DESTROY>");
 }
 
 void	safe_thread(pthread_t *thread, void *(*foo)(void *), t_philo *philo,
@@ -77,5 +77,6 @@ void	safe_thread(pthread_t *thread, void *(*foo)(void *), t_philo *philo,
 	else if (DETACH == operation)
 		thread_error(pthread_detach(*thread), operation);
 	else
-		error_exit("You can only use <CREATE> <JOIN> or <DETACH> threads operation !");
+		error_exit("You can only use:"
+			"<CREATE> <JOIN> or <DETACH> threads operation !");
 }
