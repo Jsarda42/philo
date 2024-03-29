@@ -6,7 +6,7 @@
 /*   By: jsarda <jsarda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:41:33 by jsarda            #+#    #+#             */
-/*   Updated: 2024/03/28 18:37:13 by jsarda           ###   ########.fr       */
+/*   Updated: 2024/03/29 12:51:28 by jsarda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	eating_routine(t_philo *philo)
 	philo->last_meal = get_time_of_day();
 	safe_mutex(&philo->prog->meal_lock, UNLOCK);
 	print_message(philo->id, "is eating", philo);
-	usleep_breakdown(philo->time_to_eat);
+	usleep_breakdown(2);
 	safe_mutex(&philo->prog->meal_lock, LOCK);
 	philo->meal_eaten = philo->meal_eaten + 1;
 	safe_mutex(&philo->prog->meal_lock, UNLOCK);

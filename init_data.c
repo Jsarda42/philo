@@ -6,7 +6,7 @@
 /*   By: jsarda <jsarda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 12:57:42 by jsarda            #+#    #+#             */
-/*   Updated: 2024/03/28 13:23:38 by jsarda           ###   ########.fr       */
+/*   Updated: 2024/03/29 12:08:49 by jsarda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	philo_init(t_prog *prog, t_philo *philos, pthread_mutex_t *forks)
 		philos[i].time_to_die = philos->time_to_die;
 		philos[i].num_eat = philos->num_eat;
 		philos[i].threshold = (philos->time_to_die
-				- (philos->time_to_eat + philos->time_to_sleep)) / 2;
+				- (philos->time_to_eat + philos->time_to_sleep)) / 3;
 		philos[i].prog = prog;
 		if (i == 0)
 			philos[i].neighbor_fork = &forks[philos[i].num_of_philos - 1];

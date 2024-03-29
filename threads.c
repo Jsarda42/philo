@@ -6,7 +6,7 @@
 /*   By: jsarda <jsarda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 17:20:25 by juliensarda       #+#    #+#             */
-/*   Updated: 2024/03/28 13:23:42 by jsarda           ###   ########.fr       */
+/*   Updated: 2024/03/29 12:45:55 by jsarda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	ft_threads(t_philo *philos)
 			i = philos->num_of_philos;
 			finished_eating = 1;
 		}
+		usleep_breakdown(5);
 	}
 	i = 0;
 	while (i < philos->num_of_philos)
