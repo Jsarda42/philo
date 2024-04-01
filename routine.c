@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsarda <jsarda@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juliensarda <juliensarda@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:41:33 by jsarda            #+#    #+#             */
-/*   Updated: 2024/04/01 18:57:30 by jsarda           ###   ########.fr       */
+/*   Updated: 2024/04/01 20:11:07 by juliensarda      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,18 +80,22 @@ void	*philo_routine(void *pointer)
 	while (tmp_dead_flag != 1 && (philo->num_eat == -1
 			|| philo->meal_eaten < philo->num_eat))
 	{
-		eating_routine(philo);
-		if (philo->meal_eaten == philo->num_eat)
-			break;
 		tmp_dead_flag = mutex_dead_flag_lock(philo);
 		if (tmp_dead_flag != 1 && (philo->num_eat == -1
 				|| philo->meal_eaten < philo->num_eat))
-		{
+			eating_routine(philo);
+		tmp_dead_flag = mutex_dead_flag_lock(philo);
+		if (tmp_dead_flag != 1 && (philo->num_eat == -1
+				|| philo->meal_eaten < philo->num_eat))
 			sleeping_routine(philo);
-			tmp_dead_flag = mutex_dead_flag_lock(philo);
+		tmp_dead_flag = mutex_dead_flag_lock(philo);
+		if (tmp_dead_flag != 1 && (philo->num_eat == -1
+				|| philo->meal_eaten < philo->num_eat))
 			print_message(philo->id, "is thinking", philo);
+		tmp_dead_flag = mutex_dead_flag_lock(philo);
+		if (tmp_dead_flag != 1 && (philo->num_eat == -1
+				|| philo->meal_eaten < philo->num_eat))
 			thinking_time(philo);
-		}
 		tmp_dead_flag = mutex_dead_flag_lock(philo);
 	}
 	return (NULL);
