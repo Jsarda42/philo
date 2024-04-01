@@ -6,7 +6,7 @@
 /*   By: jsarda <jsarda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 16:57:10 by jsarda            #+#    #+#             */
-/*   Updated: 2024/03/29 12:58:43 by jsarda           ###   ########.fr       */
+/*   Updated: 2024/04/01 11:04:32 by jsarda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ void	parsing_init(t_philo *philo, int argc, char **argv)
 {
 	philo->num_of_philos = ft_atol(argv[1]);
 	philo->time_to_die = ft_atol(argv[2]);
-	if (philo->num_of_philos > PHILO_MAX || philo->num_of_philos <= 0 || philo->time_to_die <= 0)
+	if (philo->num_of_philos > PHILO_MAX || philo->num_of_philos <= 0
+		|| philo->time_to_die <= 0)
 		error_exit("philo number need to be between 1 and 200!!");
 	philo->time_to_eat = ft_atol(argv[3]);
 	philo->time_to_sleep = ft_atol(argv[4]);

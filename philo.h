@@ -6,7 +6,7 @@
 /*   By: jsarda <jsarda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 14:19:59 by jsarda            #+#    #+#             */
-/*   Updated: 2024/03/28 13:23:38 by jsarda           ###   ########.fr       */
+/*   Updated: 2024/04/01 19:13:29 by jsarda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ int					ft_strlen(char *str);
 size_t				get_time_of_day(void);
 void				print_message(int id, char *message, t_philo *philo);
 void				usleep_breakdown(size_t time_ms);
+void				thinking_time(t_philo *philo);
+void				wait_before_start(t_philo *philo);
 
 // init
 void				parsing_init(t_philo *table, int argc, char **argv);
