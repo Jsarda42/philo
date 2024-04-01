@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dinner_end.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsarda <jsarda@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juliensarda <juliensarda@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 12:09:01 by juliensarda       #+#    #+#             */
-/*   Updated: 2024/04/01 11:00:55 by jsarda           ###   ########.fr       */
+/*   Updated: 2024/04/01 20:52:13 by juliensarda      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,20 @@ void	destory_all(t_philo *philo, pthread_mutex_t *forks)
 	}
 }
 
-int	check_death(t_philo *philo)
-{
-	size_t	last_meal_tmp;
+// int	check_death(t_philo *philo)
+// {
+// 	size_t	last_meal_tmp;
 
-	safe_mutex(&philo->prog->meal_lock, LOCK);
-	last_meal_tmp = philo->last_meal;
-	safe_mutex(&philo->prog->meal_lock, UNLOCK);
-	if (get_time_of_day() - last_meal_tmp >= (size_t)philo->time_to_die)
-	{
-		print_message(philo->id, "died", philo);
-		safe_mutex(&philo->prog->dead_lock, LOCK);
-		philo->prog->dead_flag = 1;
-		safe_mutex(&philo->prog->dead_lock, UNLOCK);
-		return (1);
-	}
-	return (0);
-}
+// 	safe_mutex(&philo->prog->meal_lock, LOCK);
+// 	last_meal_tmp = philo->last_meal;
+// 	safe_mutex(&philo->prog->meal_lock, UNLOCK);
+// 	if (get_time_of_day() - last_meal_tmp >= (size_t)philo->time_to_die)
+// 	{
+// 		print_message(philo->id, "died", philo);
+// 		safe_mutex(&philo->prog->dead_lock, LOCK);
+// 		philo->prog->dead_flag = 1;
+// 		safe_mutex(&philo->prog->dead_lock, UNLOCK);
+// 		return (1);
+// 	}
+// 	return (0);
+// }
