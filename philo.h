@@ -6,7 +6,7 @@
 /*   By: jsarda <jsarda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 14:19:59 by jsarda            #+#    #+#             */
-/*   Updated: 2024/04/01 19:13:29 by jsarda           ###   ########.fr       */
+/*   Updated: 2024/04/01 22:50:47 by jsarda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ typedef struct s_philo
 	long			time_to_die;
 	long			time_to_eat;
 	long			time_to_sleep;
-	long			threshold;
 	long			num_of_philos;
 	long			num_eat;
 	pthread_mutex_t	*neighbor_fork;

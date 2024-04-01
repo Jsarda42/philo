@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juliensarda <juliensarda@student.42.fr>    +#+  +:+       +#+        */
+/*   By: jsarda <jsarda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:41:33 by jsarda            #+#    #+#             */
-/*   Updated: 2024/04/01 20:53:00 by juliensarda      ###   ########.fr       */
+/*   Updated: 2024/04/01 22:14:07 by jsarda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,11 @@ void	*philo_routine(void *pointer)
 	wait_before_start(philo);
 	while (tmp_dead_flag != 1)
 	{
-			eating_routine(philo);
-			sleeping_routine(philo);
-			print_message(philo->id, "is thinking", philo);
-			thinking_time(philo);
+		tmp_dead_flag = mutex_dead_flag_lock(philo);
+		eating_routine(philo);
+		sleeping_routine(philo);
+		print_message(philo->id, "is thinking", philo);
+		thinking_time(philo);
 	}
 	return (NULL);
 }
