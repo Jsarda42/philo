@@ -6,7 +6,7 @@
 /*   By: jsarda <jsarda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 17:20:25 by juliensarda       #+#    #+#             */
-/*   Updated: 2024/04/01 23:14:05 by jsarda           ###   ########.fr       */
+/*   Updated: 2024/04/01 23:21:14 by jsarda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int	check_death_for_each_philo(t_philo *philo)
 		if (check_death(&philo[i]))
 			return (1);
 		i++;
+		usleep_breakdown(2);
 	}
 	return (0);
 }
@@ -79,7 +80,8 @@ void	*check_status(void *pointer)
 	while (42)
 		if (check_death_for_each_philo(philos) == 1
 			|| check_each_philo_eaten(philos) == 1)
-			return (NULL);
+			break ;
+	return (NULL);
 }
 
 void	ft_threads(t_philo *philos)
